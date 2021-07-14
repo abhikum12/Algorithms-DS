@@ -1,0 +1,25 @@
+#include<bits/stdc++.h>
+using namespace std;
+//WE NEED ONE CALL THAT WOULD ASK FOR DFS OF EVERY NODE AND THE OTHER WHICH **WOULD NEED A START** TO DO DFS ON ALL OF ITS CONNECTED NEIGHBOUR. HERE, dfsRec AND dfs, RESPECTIVELY.
+class Solution 
+{
+    public:
+    vector<int> res;
+    void dfs(bool visited[], int V, vector<int> adj[], int s){
+        res.push_back(s);
+        visited[s]=true;
+        for(int i=0;i<adj[s].size();i++){
+            if(!visited[adj[s][i]])dfs(visited,V,adj,adj[s][i]);
+        }
+    }
+    void dfsRec(int V,vector<int> adj[],bool visited[]){
+        for(int i=0;i<V;i++)if(!visited[i])dfs(visited,V,adj,i);
+    }
+	
+	vector<int>dfsOfGraph(int V, vector<int> adj[])
+	{
+	   bool visited[V]={false};
+	   dfsRec(V,adj,visited);
+	   return res;
+	}
+};
