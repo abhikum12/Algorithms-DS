@@ -1,0 +1,38 @@
+//AMONGST ALL THE NEIGHBOURS OF A GIVEN NODE, IF THERE IS A NODE WHICH IS ALREADY VISITED, THEN IT MUST BE THE PARENT, OTHERWISE CYCLE EXIST
+//WE ARE USING A QUEUES OF PAIR TO STORE A NODE AND THE PARENT OF THE NODE.
+class Solution 
+{
+    public:
+    bool cycle=false;
+    void bfs(int s, bool visited[], vector<int> adj[]){
+        queue<pair<int,int>> q;
+        q.push({s,-1});   //{NODE, PARENT}
+        visited[s]=true;
+        while(!q.empty()){
+            auto f=q.front();
+            q.pop();
+            for(int i=0;i<adj[f.first].size();i++){
+                if(!visited[adj[f.first][i]]){
+                    q.push({adj[f.first][i],f.first});
+                    visited[adj[f.first][i]]=true;
+                }
+                else  {                        // found a visited node
+                     if(adj[f.first][i]!=f.second){    // the current node's parent(f.second) is not equal to the adjacent of teh current node, Cycle exist.
+                         cycle=true;
+                         return;
+                }
+            }
+        }
+        
+    }
+    }
+    
+	bool isCycle(int V, vector<int>adj[])
+	{
+	    bool visited[V]={false};
+	    for(int i=0;i<V;i++){
+	    if(!visited[i] && !cycle)bfs(i,visited,adj);}
+	    return cycle?true:false;
+	}
+	
+};
