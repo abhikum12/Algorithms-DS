@@ -1,0 +1,29 @@
+class Solution
+{
+    public:
+    vector<int> res;
+    void bfs(int s, bool visited[],vector<int> adj[]){     // ALL THE CONNECTED NODES ARE HERE 
+        queue<int> q;
+        q.push(s);
+        res.push_back(s);
+        visited[s]=true;
+        while(!q.empty()){
+            int f=q.front();
+            q.pop();
+            for(int i=0;i<adj[f].size();i++){
+                if(!visited[adj[f][i]]){
+                    q.push(adj[f][i]);
+                    res.push_back(adj[f][i]);
+                    visited[adj[f][i]]=true;
+                }
+            }
+        }
+    }
+    vector<int>bfsOfGraph(int V, vector<int> adj[])   // THIS CALLS BFS FOR EVERY UNVISITED NODE
+	{
+	    bool visited[V]={false};
+	    //for(int i=0;i<V;i++)if(!visited[i])bfs(i,visited,adj);
+	    bfs(0,visited,adj);
+	    return res;
+	}
+};
