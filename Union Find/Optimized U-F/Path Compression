@@ -1,0 +1,22 @@
+//Redices the height of the tree
+//When we call find by path compression , we make all the children of the representative directly it's children reducing the height of the tree.
+
+int find(int x){
+  if(parent[x]==x)return x;
+  else {
+    parent[x]=find(parent[x]);
+    return parent[x];
+  }
+}
+
+// FOr a set:
+
+                    4       after compression :                      4                        height reduces to 1. optimized for futhur find calls.
+                   /                                             /  / \  \ 
+                  1                                             1  2   3  5
+                 /
+                2
+               /
+              3
+             /
+            5
