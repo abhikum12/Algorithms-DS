@@ -1,0 +1,18 @@
+// We make the sorter tree (set) a part of the bigger tree. Doing this actually saves height o fthe tree and thus time.
+//Rank is the height of the tree.
+void initialize(){
+    int parents[n]; //parents[i]=i
+    int rank[n];  //rank[i]=0;
+}
+  void UnionByRank(int x, int y){
+    int x_rep=find(x);
+    int y_rep=find(y);
+    if(x_rep==y_rep)return;
+    if(rank[x_rep]>rank[y_rep])parents[y_rep]=x_rep;
+    else if(rank[x_rep]<rank[y_rep])parents[x_rep]=y_rep;
+    else {
+          parents[x_rep]=y_rep; //Either.
+          rank[y_rep]++;     //rank will only be increased when two representatives(sets) having the same ranks are merged.
+    }
+    
+  }
