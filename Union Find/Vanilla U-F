@@ -1,0 +1,21 @@
+// Vanilla Union
+//Union means merginf two sets of the given two numbers.
+void initialize(){
+    int arr[v];
+    for(int i=0;i<v;i++)rep[i]=i;    //Initially all  are parent of themselves  
+}
+
+void Union(int x, int y){
+    int x_rep=find(x);
+    int y_rep=find(y);
+    if(x_rep==y_rep)return;
+    rep[y_rep]=x_rep;   //sets are merged
+}
+
+int find(int x) {
+  if(rep[x]==x)return x;  // Final parent is the one representing itself.
+  return find(rep[x]);   // Keep doinf until we find a representative.
+}
+
+// vanilla algo's are inefficient.
+
