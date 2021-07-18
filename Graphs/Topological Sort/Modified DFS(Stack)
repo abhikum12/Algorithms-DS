@@ -1,0 +1,24 @@
+class Solution
+{
+	public:
+	    stack<int> res;
+	    vector<int> v;
+	void dfs(int V, vector<int> adj[], int s,vector<bool> &visited){
+	    visited[s]=true;
+	    for(int i=0;i<adj[s].size();i++){
+	       if(!visited[adj[s][i]]) dfs(V,adj,adj[s][i],visited);
+	    }
+	    res.push(s); //after we are done with all the neighbours.
+	}
+	//Function to return list containing vertices in Topological order. 
+	vector<int> topoSort(int V, vector<int> adj[]) 
+	{
+	   vector<bool> visited(V,false);
+	   for(int i=0;i<V;i++)if(!visited[i])dfs(V,adj,i,visited); 
+	   while(!res.empty()){
+	       v.push_back(res.top());
+	       res.pop();
+	   }
+	   return v;
+	}
+};
