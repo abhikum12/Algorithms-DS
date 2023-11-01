@@ -1,0 +1,31 @@
+class Solution{
+    public:
+    // This function wants you to modify the given input
+    // array and no need to return anything
+    // arr: input array
+    // n: size of array
+    //Function to rearrange  the array elements alternately.
+    void rearrange(long long *arr, int n) 
+    { 
+    	
+    	long long divisor = arr[n-1] + 1;
+    	int left = 0, right = n-1;
+        for(int i=0; i< n; i++){
+            long long dividend; long long remain;
+            if(i%2 == 0){  //dealing with kth max element
+                remain = arr[i] < divisor ?  arr[i] : arr[i] % divisor;            //** NOTE : we always want to extract the original element which we have stored as a remainder. 7*6+1, we need 1 and not 6. 6 will only be required at the last.**
+                dividend = arr[right] < divisor ? arr[right] : arr[right]%divisor;
+                right--;
+            }
+            else {
+                remain = arr[i] < divisor ?  arr[i] : arr[i] % divisor;
+                dividend = arr[left] < divisor ? arr[left] : arr[left]%divisor;
+                left++;
+            }
+            arr[i] = divisor * dividend + remain;
+        }
+        for(int i =0 ; i<n ;i++)arr[i]/=divisor;
+    	// Your code here
+    	 
+    }
+};
