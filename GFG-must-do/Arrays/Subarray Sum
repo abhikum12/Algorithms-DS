@@ -1,0 +1,71 @@
+//{ Driver Code Starts
+#include <bits/stdc++.h>
+using namespace std;
+
+
+// } Driver Code Ends
+class Solution
+{
+    public:
+    //Function to find a continuous sub-array which adds up to a given number.
+    vector<int> subarraySum(vector<int>arr, int n, long long s)
+    {
+        // Your code here
+        //the point to keep in mind is that the fast pointer can exceed the slow pointer her e.
+        // Eg - [1,2,10000,5] , target=5. slow pointer will first reach at 5.
+        int slow,fast; 
+        slow=fast=0;
+        vector<int> res;
+        long long sum = arr[0];
+        while(fast < n && slow < n){
+            if(sum < s){
+                fast++;
+                sum+=arr[fast];
+            }
+            else if(sum > s){
+                sum-=arr[slow];
+                slow++;
+            }
+            else {
+                res.push_back(slow+1);
+                res.push_back(fast+1);
+                return res;
+            }
+        }
+        if(fast == n)res.push_back(-1);
+        else if(slow)
+        res.push_back(-1);
+        return res;
+    }
+};
+
+//{ Driver Code Starts.
+
+int main()
+ {
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n;
+        long long s;
+        cin>>n>>s;
+        vector<int>arr(n);
+        // int arr[n];
+        const int mx = 1e9;
+        for(int i=0;i<n;i++)
+        {
+            cin>>arr[i];
+        }
+        Solution ob;
+        vector<int>res;
+        res = ob.subarraySum(arr, n, s);
+        
+        for(int i = 0;i<res.size();i++)
+            cout<<res[i]<<" ";
+        cout<<endl;
+        
+    }
+	return 0;
+}
+// } Driver Code Ends
