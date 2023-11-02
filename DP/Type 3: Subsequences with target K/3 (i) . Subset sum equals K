@@ -1,0 +1,24 @@
+//definition of f(n,k) - > whether there exists a subseq from 0 to n-1, whose sum is equal to the target.
+#include <bits/stdc++.h> 
+bool subsetSumToK(int n, int k, vector<int> &arr) {
+    // Write your code here.
+    
+    if(n<0 || k<0 ) return false;
+    else if(k==0) return true;
+    //select nth elem or not select, accodingly reduce sum.
+    return subsetSumToK(n-1, k-arr[n-1], arr) || subsetSumToK(n-1, k, arr);
+}
+-----------------------------------------------------
+
+#include <bits/stdc++.h> 
+bool subsetSumToK(int n, int k, vector<int> &arr) {
+    // Write your code here.
+    
+    if(k==0) return true;
+    if(n==1) return arr[n-1] == k;
+    //select nth elem or not select, accodingly reduce sum.
+    bool notTake = subsetSumToK(n-1, k, arr);
+    bool take = false;
+    if(arr[n-1] <= k) take = subsetSumToK(n-1, k-arr[n-1], arr);
+    return take || notTake;
+}
