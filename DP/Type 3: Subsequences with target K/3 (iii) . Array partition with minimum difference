@@ -1,5 +1,5 @@
 //confusion : thoda confuse ho gye likh to diye hain
-
+//action taken only when we reach the 0th index
 int minSubsetSumDiffRecur(vector<int> &arr, int n, int firstSubsetSum, int secondSubsetSum){
 	if(n==0)return abs(firstSubsetSum-secondSubsetSum);
 	int takeIndexIntoFirstSubset = minSubsetSumDiffRecur(arr, n-1, firstSubsetSum+arr[n-1], secondSubsetSum);
