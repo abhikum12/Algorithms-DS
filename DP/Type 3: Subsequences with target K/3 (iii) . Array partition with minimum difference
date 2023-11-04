@@ -1,0 +1,16 @@
+//confusion : thoda confuse ho gye likh to diye hain
+
+int minSubsetSumDiffRecur(vector<int> &arr, int n, int firstSubsetSum, int secondSubsetSum){
+	if(n==0)return abs(firstSubsetSum-secondSubsetSum);
+	int takeIndexIntoFirstSubset = minSubsetSumDiffRecur(arr, n-1, firstSubsetSum+arr[n-1], secondSubsetSum);
+	int takeIndexIntoSecondSubset = minSubsetSumDiffRecur(arr, n-1, firstSubsetSum, secondSubsetSum+arr[n-1]);
+	return min(takeIndexIntoFirstSubset,takeIndexIntoSecondSubset);
+}
+int minSubsetSumDifference(vector<int>& arr, int n)
+{
+	if(n==1)return arr[0];
+	int totalSum=0;
+	for(int i : arr)totalSum+=i;
+	return minSubsetSumDiffRecur(arr,n, 0, 0);
+	// Write your code here.
+}
