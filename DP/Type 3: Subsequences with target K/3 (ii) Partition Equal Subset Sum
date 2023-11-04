@@ -1,0 +1,14 @@
+//canPartitionRecur (arr, n, firstSusetSum, SecondSubsetSum) => if there is equal partition sum from 0 to nth index.
+
+bool canPartitionRecur(vector<int> &arr, int n, int firstSubsetSum, int secondSubsetSum){
+	
+	if(n < 0) return firstSubsetSum == secondSubsetSum;
+	bool goesToFirstSusbset = canPartitionRecur(arr,n-1, firstSubsetSum+arr[n], secondSubsetSum);
+	bool goesToSecondSubset = canPartitionRecur(arr,n-1, firstSubsetSum, secondSubsetSum+arr[n]);
+	return goesToFirstSusbset || goesToSecondSubset;
+}
+bool canPartition(vector<int> &arr, int n)
+{
+	return canPartitionRecur(arr, n-1, 0 ,0);
+	// Write your code here.
+}
