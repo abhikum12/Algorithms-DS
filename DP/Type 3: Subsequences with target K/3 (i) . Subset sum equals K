@@ -22,3 +22,18 @@ bool subsetSumToK(int n, int k, vector<int> &arr) {
     if(arr[n-1] <= k) take = subsetSumToK(n-1, k-arr[n-1], arr);
     return take || notTake;
 }
+------------------------------------------------------
+memoized : *****TLE****
+#include <bits/stdc++.h> 
+bool subsetSumToK(int n, int k, vector<int> &arr) {
+    // Write your code here.
+    vector<vector<int>> dp(n,vector<int>(k+1, -1));    
+    if(k==0) return true;
+    if(n==1) return arr[n-1] == k;
+    //select nth elem or not select, accodingly reduce sum.
+    if(dp[n][k] != -1) return dp[n][k];
+    bool notTake = subsetSumToK(n-1, k, arr);
+    bool take = false;
+    if(arr[n-1] <= k) take = subsetSumToK(n-1, k-arr[n-1], arr);
+    return dp[n][k] = take || notTake;
+}
