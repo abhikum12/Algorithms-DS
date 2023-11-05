@@ -1,0 +1,16 @@
+int findWaysRecur(vector<int> &arr, int index, int target){
+	//base case begin
+	if(index < 0 && target != 0)return 0;       //take a look at the base cases again.
+	else if(target == 0)return 1; 
+	//base cases end
+	int notTaken = findWaysRecur(arr, index-1, target);
+	int taken = 0;
+	if(arr[index] <= target)taken = findWaysRecur(arr, index-1, target-arr[index]);
+	return taken + notTaken;
+
+}
+int findWays(vector<int>& arr, int k)
+{
+	return findWaysRecur(arr, arr.size()-1, k);
+	// Write your code here.
+}
