@@ -6,6 +6,7 @@ int minSubsetSumDiffRecur(vector<int> &arr, int n, int firstSubsetSum, int secon
 	int takeIndexIntoSecondSubset = minSubsetSumDiffRecur(arr, n-1, firstSubsetSum, secondSubsetSum+arr[n-1]);
 	return min(takeIndexIntoFirstSubset,takeIndexIntoSecondSubset);
 }
+---------------------------------------
 int minSubsetSumDifference(vector<int>& arr, int n)
 {
 	if(n==1)return arr[0];
@@ -14,5 +15,41 @@ int minSubsetSumDifference(vector<int>& arr, int n)
 	return minSubsetSumDiffRecur(arr,n, 0, 0);
 	// Write your code here.
 }
+-----------------------------------------
 //For tabulation, we use 3 (i) and use the LAST ROW of the dp table to get the knowledge that what sums are permissible using the whole array.
 //Soon i will post the oslution here
+//below is not a solution actually i miswrote a solution for 3(v), but the oslution would be somewhat similat only the last loop would vary.
+
+#include <bits/stdc++.h> 
+int countPartitions(int n, int d, vector<int> &arr) {
+    int totalSum = 0;
+    for(int i: arr)totalSum += i;
+    int target = (totalSum + d)/2;
+    if(target%2 != 0) return 0;
+    vector<vector<bool>> dp(n,vector<bool>(target, false));
+    //vector<vector<bool>> dp(n, vector<bool>(totalSum + d / 2, false));
+ 
+    //base cases begin
+    if(arr[0] <= target)dp[0][arr[0]]=true;
+    for(int i=0;i<n;i++)dp[i][0]=true;
+    //base cases end
+    
+    for(int i=1;i<n;i++){
+        for(int j=1;j<=target;j++){
+            bool notTaken = dp[i-1][j];
+            bool taken = false;
+            if(arr[i] <= j) taken = dp[i-1][j-arr[i]];
+            dp[i][j] = taken || notTaken;
+        }
+    }
+
+    int count =0;
+    for(bool i : dp[n-1]) if(i)count+=1;
+    return count%1000000007;
+    // Write your code here.
+}
+
+
+
+
+
