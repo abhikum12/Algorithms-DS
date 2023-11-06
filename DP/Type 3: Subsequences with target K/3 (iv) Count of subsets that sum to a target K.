@@ -1,3 +1,7 @@
+****NOTE: this algorithm fails for sets like {0,0,1}, target 1. as soon as we select 1 and see that sum is now substracted to 0, we return. 
+This leaves the zeroes. Need to write another algorithm that accounts for zeroes as well.**} 
+
+
 int findWaysRecur(vector<int> &arr, int index, int target){
 	//base case begin
 	if(index < 0 && target != 0)return 0;       //take a look at the base cases again.
@@ -37,3 +41,5 @@ int findWays(vector<int>& arr, int k)
 	// return findWaysRecur(arr, arr.size()-1, k);
 	// Write your code here.
 }
+
+
